@@ -1,0 +1,42 @@
+micronaut:
+  application:
+    name: jumpcar
+  server:
+    context-path: /api/jump-car/v1
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
+      h2:
+        paths: classpath:h2
+        mapping: /h2/**
+
+endpoints:
+  health:
+    enable: true
+    sensitive: false
+  info:
+    enable: true
+    sensitive: false
+
+datasources:
+  default:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:file:/data/car;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1
+    username: admin
+    password: 1234
+    dialect: H2
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: false
+        jdbc:
+          batch_size: 50
